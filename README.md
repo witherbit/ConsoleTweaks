@@ -35,6 +35,7 @@
 ![Alt-colored out](https://sun9-49.userapi.com/impg/FkKxoFgsoRhzEHhM4Udjt0scltPz-U-O_kACiQ/O13CNMAyQxo.jpg?size=903x457&quality=96&proxy=1&sign=405236e2dcc4432411f8b252dbe6bb0b&type=album "Орк")
 
 ### Colors
+```
 - Black = ~d~
 - DarkBlue = ~db~
 - DarkGreen = ~dg~
@@ -51,3 +52,4 @@
 - Magenta = ~m~
 - Yellow = ~y~
 - White = ~w~
+```
