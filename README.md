@@ -21,3 +21,10 @@
   Tweak.WriteLine($"~y~second line after first line");
 ```
 ![Alt-colored out](https://sun9-67.userapi.com/impg/_1J-MEs0EPyqohdQnmfgZYUgDxENpwO6Sh1e1Q/O083_u5zuyA.jpg?size=955x477&quality=96&proxy=1&sign=7a8a68c34abeb6ea03a549b207c8f5cd&type=album "Орк")
+**The array elements are output to the console using the WriteArray and WriteLineArray methods**
+```c#
+  string text = "hello;world;!";
+  string[] strings = text.Split(new char[] { ';' });
+  Tweak.WriteLineArray(strings, " ");
+```
+![Alt-colored out](https://sun9-14.userapi.com/impg/qSwNzEyVPPpsWfT-rloyyk_fy6iGdH-SwjL4oA/Qw41Y-6XKic.jpg?size=950x471&quality=96&proxy=1&sign=5920148e23d86d6cbc5fc7b8eb4d916c&type=album "Орк")
