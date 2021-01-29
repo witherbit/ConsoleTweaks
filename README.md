@@ -1,6 +1,6 @@
 # ConsoleTweaks
 ## Docs
-- **Write()**
+- Write()
 **You can use Write() to output data in the console**
 ```c#
   Tweak.Write("Hello green world!");
