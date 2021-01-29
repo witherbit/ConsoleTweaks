@@ -1,7 +1,7 @@
 ﻿
 namespace System
 {
-    public sealed class Tweak
+    public static class Tweak
     {
         public static Position Cursor
         {
@@ -173,6 +173,40 @@ namespace System
             {
                 Write(obj + separator);
             }
+        }
+
+        public static void WriteLineArray(Array array, string separator)
+        {
+            WriteArray(array, separator);
+            Line();
+        }
+
+        public static string ReadAfterWrite(object value, ConsoleColor readColor = ConsoleColor.White)
+        {
+            var defcol = Color;
+            Write(value);
+            Color = readColor;
+            string ret = Console.ReadLine();
+            Color = defcol;
+            return ret;
+        }
+        public static string ReadAfterWriteLine(object value, ConsoleColor readColor = ConsoleColor.White)
+        {
+            var defcol = Color;
+            WriteLine(value);
+            Color = readColor;
+            string ret = Console.ReadLine();
+            Color = defcol;
+            return ret;
+        }
+
+        public static string Read(ConsoleColor readColor = ConsoleColor.White)
+        {
+            var defcol = Color;
+            Color = readColor;
+            string ret = Console.ReadLine();
+            Color = defcol;
+            return ret;
         }
     }
 }
