@@ -159,7 +159,13 @@ namespace System
 
         public static void WriteLine(object value)
         {
+            Write(value);
+            Console.WriteLine();
+        }
 
+        public static void Line()
+        {
+            Console.WriteLine();
         }
 
         public static void WriteArray(Array array, string separator)
