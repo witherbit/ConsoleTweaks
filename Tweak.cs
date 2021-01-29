@@ -159,8 +159,7 @@ namespace System
 
         public static void WriteLine(object value)
         {
-            Write(value);
-            Console.WriteLine();
+            Write(value + "\n");
         }
 
         public static void Line()
