@@ -1,6 +1,6 @@
 # ConsoleTweaks
 ## Docs
-### Write() and WriteLine()
+### Standart methods
 **You can use Write() to output data in the console**
 ```c#
   Tweak.Write("Hello green world!");
@@ -15,3 +15,9 @@
   Tweak.Write($"{TweakColor.Yellow}Hello {TweakColor.Cyan}green {TweakColor.Magenta}world!");
 ```
 ![Alt-colored out](https://sun9-23.userapi.com/impg/5qtNrB0wKYPYvUmaeo-otREJBR74kDICWLUMsQ/RzC3Yv59hCQ.jpg?size=953x470&quality=96&proxy=1&sign=2c4b512d91dfab060a3ee3a99d08bf47&type=album "Орк")
+**You can also use WriteLine in the same way**
+```c#
+  Tweak.WriteLine($"~r~first line before second line");
+  Tweak.WriteLine($"~y~second line after first line");
+```
+![Alt-colored out](https://sun9-67.userapi.com/impg/_1J-MEs0EPyqohdQnmfgZYUgDxENpwO6Sh1e1Q/O083_u5zuyA.jpg?size=955x477&quality=96&proxy=1&sign=7a8a68c34abeb6ea03a549b207c8f5cd&type=album "Орк")
