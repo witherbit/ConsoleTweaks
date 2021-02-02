@@ -66,13 +66,9 @@ namespace System
 
 			foreach(var text in Inners)
             {
-				if (text.Text.Length > Size.Left - 1) text.Text.Remove(Size.Left - 2);
 				if (text.Position.Left < 0) text.Position.Left = 0;
 				if (text.Position.Top < 0) text.Position.Top = 0;
-                else if(text.Position.Top > Size.Top - 1)
-                {
-					text.Position.Top -= Size.Top - 2;
-				}
+
 				Tweak.Cursor = new Position(Position.Top + text.Position.Top + 1, Position.Left + text.Position.Left + 1);
 				Tweak.Write(text.Text);
 			}
