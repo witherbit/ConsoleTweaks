@@ -20,5 +20,30 @@ namespace System
             Top = top;
             Left = left;
         }
+
+        public override string ToString()
+        {
+            return $"{Top} {Left}";
+        }
+
+        public static Position operator+(Position pos1, Position pos2)
+        {
+            return new Position(pos1.Top + pos2.Top, pos1.Left + pos2.Left);
+        }
+
+        public static Position operator -(Position pos1, Position pos2)
+        {
+            return new Position(pos1.Top - pos2.Top, pos1.Left - pos2.Left);
+        }
+
+        public static Position operator *(Position pos1, Position pos2)
+        {
+            return new Position(pos1.Top * pos2.Top, pos1.Left * pos2.Left);
+        }
+
+        public static Position operator /(Position pos1, Position pos2)
+        {
+            return new Position(pos1.Top / pos2.Top, pos1.Left / pos2.Left);
+        }
     }
 }
