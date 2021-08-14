@@ -1,65 +1,67 @@
-﻿using System;
+﻿using ConsoleTweaks.Models;
+using ConsoleTweaks.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace System
+namespace ConsoleTweaks.Elements
 {
     public sealed class Frame
     {
-        public Position Position { get; set; }
+        public Point Position { get; set; }
 
-        public Position Size { get; set; }
+        public Point Size { get; set; }
 
         public string Color { get; set; }
 
         public List<FrameText> Inners = new List<FrameText>();
 
-        public Frame(Position size, Position position, string color = TweakColor.White)
+        public Frame(Point size, Point position, string color = TweakColor.White)
         {
             Position = position;
             Size = size;
             Color = color;
         }
 
-        public void Draw()
+        public void Update()
         {
-            Position += Tweak.Cursor;
+            Position += Output.Cursor;
             Size += Position;
 
             for (int x = Position.Top; x <= Size.Top; x++)
             {
                 for (int y = Position.Left; y <= Size.Left; y++)
                 {
-                    Tweak.Cursor = new Position(x, y);
+                    Output.Cursor = new Point(x, y);
                     if (x == Position.Top && y == Position.Left)
                     {
-                        Tweak.Write(Color + "╔");
+                        Output.Write(Color + "╔");
                     }
                     else if (x == Size.Top && y == Position.Left)
                     {
-                        Tweak.Write(Color + "╚");
+                        Output.Write(Color + "╚");
                     }
                     else if (x == Position.Top && y == Size.Left)
                     {
-                        Tweak.Write(Color + "╗");
+                        Output.Write(Color + "╗");
                     }
                     else if (x == Size.Top && y == Size.Left)
                     {
-                        Tweak.Write(Color + "╝");
+                        Output.Write(Color + "╝");
                     }
                     else if (x > Position.Top && x < Size.Top && y == Position.Left)
                     {
-                        Tweak.Write(Color + "║");
+                        Output.Write(Color + "║");
                     }
                     else if (x == Position.Top || x == Size.Top)
                     {
-                        Tweak.Write(Color + "═");
+                        Output.Write(Color + "═");
                     }
                     else if (x > Position.Top && x < Size.Top && y == Size.Left)
                     {
-                        Tweak.Write(Color + "║");
+                        Output.Write(Color + "║");
                     }
                 }
             }
@@ -69,18 +71,18 @@ namespace System
 				if (text.Position.Left < 0) text.Position.Left = 0;
 				if (text.Position.Top < 0) text.Position.Top = 0;
 
-				Tweak.Cursor = new Position(Position.Top + text.Position.Top + 1, Position.Left + text.Position.Left + 1);
-				Tweak.Write(text.Text);
+				Output.Cursor = new Point(Position.Top + text.Position.Top + 1, Position.Left + text.Position.Left + 1);
+				Output.Write(text.Text);
 			}
-            Tweak.Line();
+            Output.Line();
         }
     }
 
     public sealed class FrameText
     {
-        public Position Position { get; set; }
+        public Point Position { get; set; }
         public string Text { get; set; }
-        public FrameText(Position position_in_frame, string text)
+        public FrameText(Point position_in_frame, string text)
         {
             Position = position_in_frame;
             Text = text;

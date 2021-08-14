@@ -1,13 +1,17 @@
-﻿
-namespace System
+﻿using ConsoleTweaks.Models;
+using ConsoleTweaks.Utils;
+using System;
+
+namespace ConsoleTweaks
 {
-    public static class Tweak
+    public static class Output
     {
-        public static Position Cursor
+        internal static object _locker = new object();
+        public static Point Cursor
         {
             get
             {
-                return new Position(Console.CursorTop, Console.CursorLeft);
+                return new Point(Console.CursorTop, Console.CursorLeft);
             }
             set
             {
@@ -15,7 +19,7 @@ namespace System
             }
         }
 
-        public static ConsoleColor Color
+        public static ConsoleColor Foreground
         { 
             get
             {
@@ -41,7 +45,7 @@ namespace System
 
         public static void Write(object value)
         {
-            var defcol = Color;
+            var defcol = Foreground;
             string text = value.ToString();
             text = text
                 .Replace($"{TweakColor.Black}", $"{TweakColor.Black}{TweakColor.ShortBlack}")
@@ -66,95 +70,96 @@ namespace System
                 TweakColor.Black, TweakColor.Blue, TweakColor.Cyan, TweakColor.DarkBlue, TweakColor.DarkCyan, TweakColor.DarkGray, TweakColor.DarkGreen, TweakColor.DarkMagenta,
                 TweakColor.DarkRed, TweakColor.DarkRed, TweakColor.DarkYellow, TweakColor.Gray, TweakColor.Green, TweakColor.Magenta, TweakColor.Red, TweakColor.White, TweakColor.Yellow
             }, StringSplitOptions.RemoveEmptyEntries);
+            lock (_locker)
             foreach (var cth in ctext)
             {
                 if (cth.Contains(TweakColor.ShortBlack))
                 {
-                    Color = ConsoleColor.Black;
+                    Foreground = ConsoleColor.Black;
                     Console.Write(cth.Replace(TweakColor.ShortBlack, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortBlue))
                 {
-                    Color = ConsoleColor.Blue;
+                    Foreground = ConsoleColor.Blue;
                     Console.Write(cth.Replace(TweakColor.ShortBlue, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortCyan))
                 {
-                    Color = ConsoleColor.Cyan;
+                    Foreground = ConsoleColor.Cyan;
                     Console.Write(cth.Replace(TweakColor.ShortCyan, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortDarkBlue))
                 {
-                    Color = ConsoleColor.DarkBlue;
+                    Foreground = ConsoleColor.DarkBlue;
                     Console.Write(cth.Replace(TweakColor.ShortDarkBlue, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortDarkCyan))
                 {
-                    Color = ConsoleColor.DarkCyan;
+                    Foreground = ConsoleColor.DarkCyan;
                     Console.Write(cth.Replace(TweakColor.ShortDarkCyan, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortDarkGray))
                 {
-                    Color = ConsoleColor.DarkGray;
+                    Foreground = ConsoleColor.DarkGray;
                     Console.Write(cth.Replace(TweakColor.ShortDarkGray, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortDarkGreen))
                 {
-                    Color = ConsoleColor.DarkGreen;
+                    Foreground = ConsoleColor.DarkGreen;
                     Console.Write(cth.Replace(TweakColor.ShortDarkGreen, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortDarkMagenta))
                 {
-                    Color = ConsoleColor.DarkMagenta;
+                    Foreground = ConsoleColor.DarkMagenta;
                     Console.Write(cth.Replace(TweakColor.ShortDarkMagenta, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortDarkRed))
                 {
-                    Color = ConsoleColor.DarkRed;
+                    Foreground = ConsoleColor.DarkRed;
                     Console.Write(cth.Replace(TweakColor.ShortDarkRed, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortDarkYellow))
                 {
-                    Color = ConsoleColor.DarkYellow;
+                    Foreground = ConsoleColor.DarkYellow;
                     Console.Write(cth.Replace(TweakColor.ShortDarkYellow, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortGray))
                 {
-                    Color = ConsoleColor.Gray;
+                    Foreground = ConsoleColor.Gray;
                     Console.Write(cth.Replace(TweakColor.ShortGray, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortGreen))
                 {
-                    Color = ConsoleColor.Green;
+                    Foreground = ConsoleColor.Green;
                     Console.Write(cth.Replace(TweakColor.ShortGreen, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortMagenta))
                 {
-                    Color = ConsoleColor.Magenta;
+                    Foreground = ConsoleColor.Magenta;
                     Console.Write(cth.Replace(TweakColor.ShortMagenta, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortRed))
                 {
-                    Color = ConsoleColor.Red;
+                    Foreground = ConsoleColor.Red;
                     Console.Write(cth.Replace(TweakColor.ShortRed, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortWhite))
                 {
-                    Color = ConsoleColor.White;
+                    Foreground = ConsoleColor.White;
                     Console.Write(cth.Replace(TweakColor.ShortWhite, ""));
                 }
                 else if (cth.Contains(TweakColor.ShortYellow))
                 {
-                    Color = ConsoleColor.Yellow;
+                    Foreground = ConsoleColor.Yellow;
                     Console.Write(cth.Replace(TweakColor.ShortYellow, ""));
                 }
                 else
                 {
-                    Color = defcol;
+                    Foreground = defcol;
                     Console.Write(cth);
                 }
             }
-            Color = defcol;
+            Foreground = defcol;
         }
 
         public static void WriteLine(object value)
@@ -164,7 +169,8 @@ namespace System
 
         public static void Line()
         {
-            Console.WriteLine();
+            lock (_locker)
+                Console.WriteLine();
         }
 
         public static void WriteArray(Array array, string separator)
@@ -179,34 +185,6 @@ namespace System
         {
             WriteArray(array, separator);
             Line();
-        }
-
-        public static string ReadAfterWrite(object value, ConsoleColor readColor = ConsoleColor.White)
-        {
-            var defcol = Color;
-            Write(value);
-            Color = readColor;
-            string ret = Console.ReadLine();
-            Color = defcol;
-            return ret;
-        }
-        public static string ReadAfterWriteLine(object value, ConsoleColor readColor = ConsoleColor.White)
-        {
-            var defcol = Color;
-            WriteLine(value);
-            Color = readColor;
-            string ret = Console.ReadLine();
-            Color = defcol;
-            return ret;
-        }
-
-        public static string Read(ConsoleColor readColor = ConsoleColor.White)
-        {
-            var defcol = Color;
-            Color = readColor;
-            string ret = Console.ReadLine();
-            Color = defcol;
-            return ret;
         }
     }
 }
